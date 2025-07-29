@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css" integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css" integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css"> 
+    <title>TechStore - Modern E-Ticaret Sitesi</title>
+</head>
+<body>
+    <section class="container">
+
+    </section>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-shop"></i> TechStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Ürünler</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-light me-2" id="cart-btn">
+                        <i class="bi bi-cart3"></i> Sepet (<span id="cart-count">0</span>)
+                    </button>
+                    <button class="btn btn-light btn-sm" id="theme-toggle">
+                        <i class="bi bi-moon-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-white text-center bg-dark">
+        <div class="container">
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&h=500&fit=crop" alt="" id="slide-1">
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&h=500&fit=crop" alt="" id="slide-2">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=500&fit=crop" alt="" id="slide-3">
+                </div>
+                <div class="slider-nav">
+                    <a href="#slide-1"></a>
+                    <a href="#slide-2"></a>
+                    <a href="#slide-3"></a>
+                </div>
+                
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <div class="card bg-dark bg-opacity-75 border-0 shadow-lg rounded-4">
+                            <div class="card-body">
+                                <div class="hero-text-container">
+                                    <h1 class="display-4 fw-bold text-white">En Yeni Teknoloji Ürünleri</h1>
+                                    <p class="lead text-white">Kaliteli ve uygun fiyatlı teknoloji ürünleri için doğru adrestesiniz!</p>
+                                    <button class="btn btn-warning btn-lg me-3" onclick="scrollToSection('products')">
+                                        <i class="bi bi-bag-check"></i> Alışverişe Başla
+                                    </button>
+                                    <button class="btn btn-outline-light btn-lg" onclick="scrollToSection('about')">
+                                        Daha Fazla Bilgi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+
+    <!-- Search and Filter Section -->
+    <section class="bg-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" id="search-input" class="form-control" placeholder="Ürün ara...">
+                        <button class="btn btn-primary" type="button" id="search-btn">Ara</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select" id="category-filter">
+                        <option value="">Tüm Kategoriler</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="telefon">Telefon</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="aksesuvar">Aksesuvar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2>Öne Çıkan Ürünler</h2>
+                <button class="btn btn-success" onclick="addNewProduct()">
+                    <i class="bi bi-plus-circle"></i> Yeni Ürün Ekle
+                </button>
+            </div>
+            
+            <!-- Mevcut alışveriş listesi bölümü korundu -->
+            <div class="shopping-section mb-5">
+                <h3>Alışveriş Listesi</h3>
+                <form class="shopping-form border rounded p-5 mb-3">
+                    <div class="input-group">
+                        <input type="text" id="item" class="form-control" placeholder="Eleman ekle">
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-plus"></i></button>
+                    </div>
+                </form>
+                <ul class="shopping-list list-unstyled">
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=50&h=50&fit=crop" class="product-thumb me-3" alt="iPhone">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">iPhone 15 Pro</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=50&h=50&fit=crop" class="product-thumb me-3" alt="iPad">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">iPad Air</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=50&h=50&fit=crop" class="product-thumb me-3" alt="MacBook">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">MacBook Pro M3</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=50&h=50&fit=crop" class="product-thumb me-3" alt="AirPods">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">AirPods Pro</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=50&h=50&fit=crop" class="product-thumb me-3" alt="Dell">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">Dell XPS 13</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                    <li class="border rounded p-3 mb-1">
+                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=50&h=50&fit=crop" class="product-thumb me-3" alt="Samsung">
+                        <input type="checkbox" class="form-check-input">
+                        <div class="item-name">Samsung Galaxy S24</div>
+                        <i class="fs-3 bi bi-x text-danger delete-icon"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Ürün Kataloğu -->
+            <div class="row" id="products-container">
+                <!-- Ürünler JavaScript ile yüklenecek -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Hakkımızda</h2>
+                    <p class="lead">2025 yılından beri teknoloji dünyasının en yeni ve kaliteli ürünlerini müşterilerimizle buluşturuyoruz.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Güvenli Alışveriş</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Hızlı Kargo</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> 7/24 Müşteri Desteği</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> En Uygun Fiyatlar</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">İletişim</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <form id="contact-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" placeholder="Adınız" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="email" class="form-control" placeholder="E-posta" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Konu" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Mesajınız" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send"></i> Mesaj Gönder
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>TechStore</h5>
+                    <p>Teknolojinin en iyisini size sunuyoruz.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                    <p class="mt-2">&copy; 2025 TechStore. Tüm hakları saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alışveriş Sepeti</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-items">
+                    <!-- Sepet ürünleri buraya gelecek -->
+                </div>
+                <div class="modal-footer">
+                    <div class="me-auto">
+                        <strong>Toplam: <span id="cart-total">0</span> TL</strong>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-success" id="checkout-btn">Siparişi Tamamla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
